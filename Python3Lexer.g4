@@ -5,10 +5,6 @@ tokens {
     DEDENT
 }
 
-options {
-    superClass = Python3LexerBase;
-}
-
 STRING: '"' ( ESC_SEQ | ~['"\\] )* '"'
        | '\'' ( ESC_SEQ | ~['\'\\] )* '\''
        ;

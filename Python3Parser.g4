@@ -1,7 +1,6 @@
 parser grammar Python3Parser;
 
 options {
-    superClass = Python3ParserBase;
     tokenVocab = Python3Lexer;
 }
 
