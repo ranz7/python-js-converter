@@ -45,8 +45,13 @@ This project aims to develop a compiler that automatically converts source code 
 
 ## Get started
 **Prerequisites**
+- JDK
+- ANTLR4
+- Python and PIP
+- JavaScript
 
 **Installation**
+- https://github.com/antlr/antlr4/blob/master/doc/getting-started.md
 
 
 ## Example
