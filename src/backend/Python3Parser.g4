@@ -133,7 +133,6 @@ augassign
     )
     ;
 
-// For normal and annotated assignments, additional restrictions enforced by the interpreter
 del_stmt
     : 'del' exprlist
     ;
@@ -179,7 +178,6 @@ import_name
     : 'import' dotted_as_names
     ;
 
-// note below: the ('.' | '...') is necessary because '...' is tokenized as ELLIPSIS
 import_from
     : (
         'from' (('.' | '...')* dotted_name | ('.' | '...')+) 'import' (
@@ -268,7 +266,6 @@ with_item
     : test ('as' expr)?
     ;
 
-// NB compile.c makes sure that the default except clause is last
 except_clause
     : 'except' (test ('as' name)?)?
     ;
@@ -379,7 +376,7 @@ capture_pattern
     ;
 
 pattern_capture_target
-    : /* cannot be '_' */ name { self.CannotBeDotLpEq() }?
+    : name { self.CannotBeDotLpEq() }?
     ;
 
 wildcard_pattern
@@ -499,8 +496,6 @@ comparison
     : expr (comp_op expr)*
     ;
 
-// <> isn't actually a valid comparison operator in Python. It's here for the
-// sake of a __future__ import described in PEP 401 (which really works :-)
 comp_op
     : '<'
     | '>'
@@ -531,14 +526,6 @@ expr
     | expr '|' expr
     ;
 
-//expr: xor_expr ('|' xor_expr)*;
-//xor_expr: and_expr ('^' and_expr)*;
-//and_expr: shift_expr ('&' shift_expr)*;
-//shift_expr: arith_expr (('<<'|'>>') arith_expr)*;
-//arith_expr: term (('+'|'-') term)*;
-//term: factor (('*'|'@'|'/'|'%'|'//') factor)*;
-//factor: ('+'|'-'|'~') factor | power;
-//power: atom_expr ('**' factor)?;
 atom_expr
     : AWAIT? atom trailer*
     ;
@@ -608,15 +595,6 @@ arglist
     : argument (',' argument)* ','?
     ;
 
-// The reason that keywords are test nodes instead of NAME is that using NAME
-// results in an ambiguity. ast.c makes sure it's a NAME.
-// "test '=' test" is really "keyword '=' test", but we have no such token.
-// These need to be in a single rule to avoid grammar that is ambiguous
-// to our LL(1) parser. Even though 'test' includes '*expr' in star_expr,
-// we explicitly match '*' here, too, to give it proper precedence.
-// Illegal combinations and orderings are blocked in ast.c:
-// multiple (test comp_for) arguments are blocked; keyword unpackings
-// that precede iterable unpackings are blocked; etc.
 argument
     : (test comp_for? | test '=' test | '**' test | '*' test)
     ;
@@ -634,7 +612,6 @@ comp_if
     : 'if' test_nocond comp_iter?
     ;
 
-// not used in grammar, but may appear in "node" passed from Parser to Compiler
 encoding_decl
     : name
     ;
