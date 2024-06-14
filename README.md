@@ -40,7 +40,7 @@ This project aims to develop a compiler that automatically converts source code 
    - Validate the generated JavaScript code by running it in a JavaScript environment, ensuring functional equivalence with the original Python code.
 
 7. **GUI:**
-   - Create user interface, that consists of place for Python code and place for generated Javascript equivalent.
+   - Create user interface, that consists of place for Python code and place for generated Javascript equivalent. User can also compile converted code and see results of his program.
 
 
 ## Get started
@@ -50,3 +50,7 @@ This project aims to develop a compiler that automatically converts source code 
 
 
 ## Example
+![Zrzut ekranu 2024-06-14 134646](https://github.com/ranz7/python-js-converter/assets/115559396/1373c11f-87db-4b80-ba1b-9834bdcd86b1)
+
+
+
